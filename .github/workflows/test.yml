@@ -1,9 +1,26 @@
 name: test
 
+# Runs on pushes to main and on pull requests, but only when code-relevant
+# files change. Doc-only edits (README, CHANGELOG, ...) skip the matrix.
+# Note: path filters apply per-file; empty-match PRs simply run no checks.
 on:
   push:
     branches: [main]
+    paths-ignore:
+      - "README.md"
+      - "LICENSE"
+      - "CHANGELOG.md"
+      - "docs/**"
+      - ".gitignore"
+      - "MANIFEST.in"
   pull_request:
+    paths-ignore:
+      - "README.md"
+      - "LICENSE"
+      - "CHANGELOG.md"
+      - "docs/**"
+      - ".gitignore"
+      - "MANIFEST.in"
 
 jobs:
   test:
