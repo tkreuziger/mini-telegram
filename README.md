@@ -1,8 +1,7 @@
 # mini-telegram
 
 A small, dependency-light toolkit for building Telegram bots: **polling,
-sending, receiving, media, inline callbacks and access control** — without
-any AI-specific layers (no personas, memory, or LLM integration).
+sending, receiving, media, inline callbacks and access control**.
 
 ## Install
 
