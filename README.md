@@ -4,11 +4,6 @@ A small, dependency-light toolkit for building Telegram bots: **polling,
 sending, receiving, media, inline callbacks and access control** — without
 any AI-specific layers (no personas, memory, or LLM integration).
 
-It is an extraction of the generic plumbing that powers the
-[`telegram-ai-bots`](https://github.com/tkreuziger/telegram-ai-bots) service
-(its `core/telegram/*` package and the two supporting utilities
-`retrying_requests_session` / `defer`), cleaned up into a reusable library.
-
 ## Install
 
 ```bash
