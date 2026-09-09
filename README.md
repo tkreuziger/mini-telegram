@@ -163,14 +163,28 @@ The tests run against a fake HTTP session — no network or bot token needed.
 
 ## Releasing (maintainers)
 
+### One-time setup: PyPI token
+
+1. Create a **project-scoped** token: https://pypi.org/manage/account/token/ →
+   *Add API token* → scope **Project: mini-telegram**.
+2. Save the `pypi-...` value as the **GitHub Actions secret** `PYPI_API_TOKEN`
+   under repo **Settings → Secrets and variables → Actions**.
+
+If the secret is absent, publishing falls back to PyPI trusted publishing
+(OIDC), which needs a pending publisher configured on
+https://pypi.org/manage/account/publishing/ instead.
+
+### Cutting a release
+
 ```bash
 # 1. bump src/minitelegram/__init__.py __version__ and commit
 # 2. build and sanity-check the artifacts
 pip install build twine
 python -m build
 twine check dist/*
+# optional: dry-run upload to TestPyPI
+#   twine upload --repository testpypi dist/*   (needs a TestPyPI token)
 # 3. push the version tag; .github/workflows/publish.yml uploads to PyPI
-#    via trusted publishing (no API token required)
 git tag v0.1.0
 git push origin v0.1.0
 ```

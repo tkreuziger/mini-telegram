@@ -2,14 +2,14 @@ name: publish
 
 # Publishes the package to PyPI when a version tag (e.g. v0.1.0) is pushed.
 #
-# Uses PyPI's trusted publishing: no API token is stored in the repo.
-# Before the first release, create the pending publisher on PyPI:
-#   https://pypi.org/manage/account/publishing/
-# with "GitHub" as the trusted publisher and
-#   owner:        tkreuziger
-#   repository:   mini-telegram
-#   workflow:     publish.yml
-# optionally limiting the environment to the "release" tag pattern.
+# Two authentication paths, the first wins:
+#   1. API token stored as the repository secret PYPI_API_TOKEN.
+#      Create a project-scoped token at https://pypi.org/manage/account/token/
+#      (scope: Project: mini-telegram) and save it in
+#      GitHub repo > Settings > Secrets and variables > Actions.
+#   2. Trusted publishing (OIDC) fallback when the secret is absent:
+#      create the pending publisher on https://pypi.org/manage/account/publishing/
+#      with owner tkreuziger, repository mini-telegram, workflow publish.yml.
 
 on:
   push:
@@ -39,4 +39,5 @@ jobs:
       - name: Publish to PyPI
         uses: pypa/gh-action-pypi-publish@release/v1
         with:
+          password: ${{ secrets.PYPI_API_TOKEN }}
           verify-metadata: true
