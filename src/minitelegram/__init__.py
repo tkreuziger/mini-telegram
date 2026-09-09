@@ -127,7 +127,7 @@ from .whitelist import (
     snapshot as whitelist_snapshot,
 )
 
-__version__ = "0.1.0"
+__version__ = "1.0.0"
 
 __all__ = [
     # modules
