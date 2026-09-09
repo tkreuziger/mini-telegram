@@ -12,8 +12,12 @@ It is an extraction of the generic plumbing that powers the
 ## Install
 
 ```bash
-pip install -e .
-# or, for development:
+pip install mini-telegram
+```
+
+From a checkout (development install with the dev toolchain):
+
+```bash
 pip install -e ".[dev]"
 ```
 
@@ -156,3 +160,17 @@ pytest
 ```
 
 The tests run against a fake HTTP session — no network or bot token needed.
+
+## Releasing (maintainers)
+
+```bash
+# 1. bump src/minitelegram/__init__.py __version__ and commit
+# 2. build and sanity-check the artifacts
+pip install build twine
+python -m build
+twine check dist/*
+# 3. push the version tag; .github/workflows/publish.yml uploads to PyPI
+#    via trusted publishing (no API token required)
+git tag v0.1.0
+git push origin v0.1.0
+```

@@ -1,36 +1,73 @@
 [build-system]
-requires = ["setuptools>=68"]
+requires = ["setuptools>=77"]
 build-backend = "setuptools.build_meta"
 
 [project]
 name = "mini-telegram"
-version = "0.1.0"
 description = "Small, dependency-light toolkit for building Telegram bots: polling, sending, media, inline callbacks and access control."
 readme = "README.md"
 requires-python = ">=3.10"
-license = { text = "MIT" }
-keywords = ["telegram", "bot", "polling", "callback", "api", "messaging"]
+license = "MIT"
+license-files = ["LICENSE"]
+authors = [
+    { name = "Tristan Kreuziger", email = "tristan@krey.io" },
+]
+maintainers = [
+    { name = "Tristan Kreuziger", email = "tristan@krey.io" },
+]
+keywords = [
+    "telegram",
+    "bot",
+    "polling",
+    "long-polling",
+    "inline-keyboard",
+    "callback",
+    "media",
+    "api",
+    "messaging",
+    "chatbot",
+]
 classifiers = [
     "Development Status :: 4 - Beta",
     "Intended Audience :: Developers",
-    "License :: OSI Approved :: MIT License",
+    "Operating System :: OS Independent",
     "Programming Language :: Python :: 3",
+    "Programming Language :: Python :: 3.10",
+    "Programming Language :: Python :: 3.11",
+    "Programming Language :: Python :: 3.12",
+    "Programming Language :: Python :: 3.13",
     "Topic :: Communications :: Chat",
+    "Typing :: Typed",
 ]
+# Version lives in src/minitelegram/__init__.py (single source of truth).
+dynamic = ["version"]
 dependencies = [
     "requests>=2.28",
 ]
 
 [project.optional-dependencies]
 dev = [
+    "build>=1.2",
+    "mypy>=1.15",
     "pytest>=8.0",
+    "ruff>=0.9",
+    "twine>=6.0",
 ]
 
-[tool.setuptools.packages.find]
-where = ["src"]
+[project.urls]
+Homepage = "https://github.com/tkreuziger/mini-telegram"
+Repository = "https://github.com/tkreuziger/mini-telegram"
+Issues = "https://github.com/tkreuziger/mini-telegram/issues"
+Documentation = "https://github.com/tkreuziger/mini-telegram/blob/main/README.md"
+
+[tool.setuptools]
+packages = { find = { where = ["src"] } }
 
 [tool.setuptools.package-data]
 minitelegram = ["py.typed"]
+
+[tool.setuptools.dynamic]
+version = { attr = "minitelegram.__version__" }
 
 [tool.pytest.ini_options]
 pythonpath = ["src"]

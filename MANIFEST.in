@@ -1,0 +1,5 @@
+# Files referenced from project metadata (PEP 639 / readme) and package data
+# that must be present in the source distribution.
+include LICENSE
+include README.md
+recursive-include src/minitelegram py.typed
